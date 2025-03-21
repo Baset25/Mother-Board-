@@ -1,85 +1,374 @@
-<!DOCTYPE html>
-<html lang="en">
+/* General Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register or Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="style2.css">
-</head>
+body {
+  background-color: #e5a60c;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-<body>
-    <!-- Here is the register container-->
-    <div class="container" id="signUp" style="display: none;">
-        <h1 class="register">Register</h1>
-        <form method="post" action="register.php">
-            <div class="input-group">
-                <i class="fas fa-user"></i>
-                <input type="text" name="fName" id="fName" placeholder="First Name" required>
-                <label for="fName">First Name</label>
-            </div>
-            <div class="input-group">
-                <i class="fas fa-user"></i>
-                <input type="text" name="lName" id="lName" placeholder="Last Name" required>
-                <label for="lName">Last Name</label>
-            </div>
-            <div class="input-group">
-                <i class="fas fa-envelope"></i>
-                <input type="email" name="email" id="email" placeholder="E-mail" required>
-                <label for="email">E-mail</label>
-            </div>
-            <div class="input-group">
-                <i class="fas fa-lock"></i>
-                <input type="password" name="password" id="password" placeholder="Password" required>
-                <label for="password">Password</label>
-            </div>
-            <input type="submit" class="btn" value="Sign Up" name="signUp">
-        </form>
-        <p class="or">
-            ------or------
-        </p>
-        <div class="icon">
-            <i class="fab fa-google"></i>
-            <i class="fab fa-facebook"></i>
-        </div>
-        <div class="links">
-            <p>Already Have Account?</p>
-            <button id="SignInButton">Sign In</button>
-        </div>
-    </div>
-    <!-- Here is the sign in container -->
-    <div class="container" id="signIn">
-        <h1 class="register">Sign In</h1>
-        <form method="post" action="register.php">
-            <div class="input-group">
-                <i class="fas fa-envelope"></i>
-                <input type="email" name="email" id="email" placeholder="E-mail" required>
-                <label for="email">E-mail</label>
-            </div>
-            <div class="input-group">
-                <i class="fas fa-lock"></i>
-                <input type="password" name="password" id="password" placeholder="Password" required>
-                <label for="password">Password</label>
-            </div>
-            <p class="recover">
-                <a href="#">Forgot Password</a>
-            </p>
-            <input type="submit" class="btn" value="Sign In" name="signIn">
-        </form>
-        <p class="or">
-            ------or------
-        </p>
-        <div class="icon">
-            <i class="fab fa-google"></i>
-            <i class="fab fa-facebook"></i>
-        </div>
-        <div class="links">
-            <p>Don't Have Account?</p>
-            <button id="SignUpButton">Sign Up</button>
-        </div>
-    </div>
-    <script src="script2.js"></script>
-</body>
+/* Header with Horizontal Navigation */
+.main-header {
+  background-color: #93da38;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #dcc5c5;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
 
-</html>
+.logo img {
+  max-width: 180px;
+  max-height: auto;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav ul li {
+  margin: 0;
+}
+
+.nav ul li a {
+  text-decoration: none;
+  color: #000000;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 10px 15px;
+  transition: 0.2s all ease;
+  border-radius: 5px;
+}
+
+.nav ul li a:hover {
+  background-color: #e57020;
+  color: white;
+}
+
+/* News Section */
+.news-section {
+  background-color: #093b70;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 80px; /* Offset for fixed header */
+}
+
+/* Motivational Quote Section */
+.motivational-quote-container {
+  position: relative;
+  height: calc(100vh - 160px);
+  background: url('images/uni2.jpg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-box {
+  background: rgb(255 247 247 / 10%);
+  padding: 2rem;
+  max-width: 800px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.motivational-quote {
+  font-size: 2rem;
+  color: #ffffff;
+  line-height: 1.4;
+  text-shadow: 2px 2px 4px #fbfbfb;
+}
+/* Hero Section */
+.hero-section {
+  position: relative;
+  height: auto;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.text-box {
+  position: relative;
+  z-index: 2;
+  background: rgb(57 45 45 / 30%);
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 800px;
+  margin: 0 20px;
+  text-align: center;
+  backdrop-filter: transparent(4px);
+}
+
+.motivational-quote {
+  font-size: 2rem;
+  color: #ffffff;
+  line-height: 1.4;
+  font-weight: 500;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 1rem;
+}
+
+.quote-author {
+  font-size: 1.5rem;
+  color: #f5440b;
+  font-style: italic;
+  display: block;
+  margin-top: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .text-box {
+    padding: 1.5rem;
+    margin: 0 15px;
+  }
+  
+  .motivational-quote {
+    font-size: 1.5rem;
+  }
+  
+  .quote-author {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-box {
+    padding: 1rem;
+    margin: 0 10px;
+  }
+  
+  .motivational-quote {
+    font-size: 1.2rem;
+  }
+  
+  .quote-author {
+    font-size: 1rem;
+  }
+}
+
+.quote-author {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-style: italic;
+  color: #fced00;
+  display: block;
+}
+
+/* Events Section */
+.events-content {
+  padding: 80px 20px;
+  text-align: center;
+  background: #5cda6f;
+}
+
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+.event-card {
+  background: #ffd8d8;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(229, 213, 213, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+}
+
+.event-icon {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.event-card h3 {
+  color: #022e5a;
+  margin-bottom: 15px;
+}
+
+.event-card p {
+  color: #ea1010;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.event-btn {
+  background: #0b7df7;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.event-btn:hover {
+  background: #1675dc;
+}
+
+/* Footer Section */
+.footer {
+  background: #333;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .nav ul li a {
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+  
+  .logo img {
+    max-width: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-header {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    position: relative;
+  }
+  
+  .nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .motivational-quote-container {
+    height: auto;
+    min-height: 60vh;
+    margin-top: 20px;
+  }
+  
+  .news-section {
+    margin-top: 0;
+  }
+  
+  .text-box {
+    margin: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav ul {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .motivational-quote {
+    font-size: 1.5rem;
+  }
+  
+  .quote-author {
+    font-size: 1.2rem;
+  }
+  
+  .footer {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .event-card {
+    padding: 20px;
+  }
+}
+/* Gallery Section */
+.gallery-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.caption {
+  padding: 10px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.view-more-btn {
+  background: #0b7df7;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  display: block;
+  margin: 30px auto;
+  transition: background 0.3s ease;
+}
+
+.view-more-btn:hover {
+  background: #1675dc;
+}
