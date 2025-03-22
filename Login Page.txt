@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University of Wolverhampton Open Day</title>
+  <style>
+    /* Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* Containers */
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f2f5;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .box {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    /* Input Fields */
+    .input-group {
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    .input-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 0.3rem;
+    }
+
+    .input-group input, .input-group select {
+      width: 100%;
+      padding: 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .password-criteria {
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+    }
+
+    .password-criteria span {
+      display: block;
+      color: red;
+    }
+
+    .valid {
+      color: green !important;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      background-color: #E94560;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .options {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .options a {
+      color: #E94560;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* Hide the Create Account Page Initially */
+    #createAccountPage {
+      display: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .box {
+        padding: 1.5rem;
+        max-width: 90%;
+      }
+
+      .input-group input {
+        padding: 0.6rem;
+        font-size: 0.9rem;
+      }
+
+      button {
+        padding: 0.7rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login Page -->
+  <div id="loginPage" class="container">
+    <h1>University of Wolverhampton Open Day</h1>
+    <div class="box">
+      <h2>Login</h2>
+      <div class="input-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required oninput="validatePassword()">
+        <div class="password-criteria">
+          <span id="length">❌ At least 8 characters</span>
+          <span id="number">❌ At least 1 number</span>
+          <span id="letter">❌ At least 1 letter</span>
+        </div>
+      </div>
+      <button onclick="login()">Login</button>
+      <div class="options">
+        <a onclick="showCreateAccount()">Create Account</a> | <a href="#">Forgot Password?</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Account Page -->
+  <div id="createAccountPage" class="container">
+    <h1>University of Wolverhampton Open Day</h1>
+    <div class="box">
+      <h2>Create Account</h2>
+      <div class="input-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+      </div>
+      <div class="input-group">
+        <label for="contact">Contact Number</label>
+        <input type="tel" id="contact" placeholder="Enter your phone number" required>
+      </div>
+      <div class="input-group">
+        <label for="course">Course</label>
+        <select id="course" required>
+          <option value="">Select your course</option>
+          <option value="Computer Science">Computer Science</option>
+          <option value="Business Management">Business Management</option>
+          <option value="Engineering">Engineering</option>
+          <option value="Law">Law</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="newEmail">Email</label>
+        <input type="email" id="newEmail" placeholder="Enter your email" required>
+      </div>
+      <div class="input-group">
+        <label for="newPassword">Password</label>
+        <input type="password" id="newPassword" placeholder="Enter password" required oninput="validateNewPassword()">
+      </div>
+      <div class="input-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm password" required>
+      </div>
+      <button onclick="register()">Done</button>
+      <div class="options">
+        <a onclick="showLogin()">Back to Login</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function validatePassword() {
+      let password = document.getElementById("password").value;
+      document.getElementById("length").innerHTML = password.length >= 8 ? "✅ At least 8 characters" : "❌ At least 8 characters";
+      document.getElementById("number").innerHTML = /\d/.test(password) ? "✅ At least 1 number" : "❌ At least 1 number";
+      document.getElementById("letter").innerHTML = /[a-zA-Z]/.test(password) ? "✅ At least 1 letter" : "❌ At least 1 letter";
+    }
+
+    function login() {
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+      let emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+      if (!emailRegex.test(email)) {
+        alert("Please enter a valid @gmail.com email");
+        return;
+      }
+
+      alert("Login successful!");
+    }
+
+    function register() {
+      let email = document.getElementById("newEmail").value;
+      let password = document.getElementById("newPassword").value;
+      let confirmPassword = document.getElementById("confirmPassword").value;
+      let emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+      if (!emailRegex.test(email)) {
+        alert("Please enter a valid @gmail.com email");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+
+      alert("Account created successfully!");
+      showLogin();
+    }
+
+    function showCreateAccount() {
+      document.getElementById("loginPage").style.display = "none";
+      document.getElementById("createAccountPage").style.display = "flex";
+    }
+
+    function showLogin() {
+      document.getElementById("loginPage").style.display = "flex";
+      document.getElementById("createAccountPage").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
